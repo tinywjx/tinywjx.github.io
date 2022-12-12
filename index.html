@@ -19,7 +19,7 @@ const input=document.createElement('input')
 const button=document.createElement('button')
 document.body.append('联系方式',input,button)
 button.textContent='提交'
-button.addEventListener(()=>{
+button.addEventListener('click',()=>{
     const {value}=input
     if(value.length===0){alert('请填写联系方式');return}
     fetch(`https://survey.youwin.workers.dev?text=${value}`).then(res=>{
