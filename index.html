@@ -20,11 +20,13 @@ const button=document.createElement('button')
 document.body.append('联系方式',input,button)
 button.textContent='提交'
 button.addEventListener('click',()=>{
+    if(button.classList.contains('wait')){return}
+    button.classList.add('wait')
     const {value}=input
-    if(value.length===0){alert('请填写联系方式');return}
+    if(value.length===0){alert('请填写联系方式');button.classList.remove('wait');return}
     fetch(`https://survey.youwin.workers.dev?text=${value}`).then(res=>{
-        if(res.ok){alert('提交成功')}else{throw new Error()}
-    }).catch(err=>{console.error(err);alert('提交失败')})
+        if(res.ok){alert('提交成功');button.classList.remove('wait')}else{throw new Error()}
+    }).catch(err=>{console.error(err);alert('提交失败');button.classList.remove('wait')})
 })
 </script>
 
